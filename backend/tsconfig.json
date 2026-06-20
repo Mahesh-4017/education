@@ -1,13 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "CommonJS",
-    "rootDir": "./src",
+    "target": "ES6", // ES6 is a common target for Node.js
+    "module": "commonjs", // Node uses commonjs module system
     "outDir": "./dist",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
+    "esModuleInterop": true, // Allows default imports for non-ES modules
+    "skipLibCheck": true, // Skip type checking of declaration files for faster compilation
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "typeRoots": [
+      "../types",
+      "./node_modules/@types"
+    ]
   },
-  "include": ["src/**/*"]
+  "include": [
+    "./**/*.ts",
+    "../types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
