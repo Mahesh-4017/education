@@ -1,0 +1,162 @@
+
+
+.slider-wrapper {
+  max-width: 800px;
+  margin: 0 auto 40px;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card {
+  min-width: 100%;
+  padding: 50px 35px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  position: relative;
+}
+
+.quote-mark {
+  font-size: 56px;
+  color: #e5e7eb;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  line-height: 1;
+}
+
+.testimonial-text {
+  font-size: 16px;
+  color: #374151;
+  line-height: 1.8;
+  margin: 0 0 30px;
+  font-weight: 400;
+}
+
+.user-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.user-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.user-details {
+  text-align: left;
+}
+
+.user-details h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.user-details span {
+  font-size: 13px;
+  color: #6b7280;
+  display: block;
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: #d1d5db;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.dot.active {
+  background: #e7e305;
+  width: 28px;
+  border-radius: 4px;
+}
+
+.dot:hover:not(.active) {
+  background: #9ca3af;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 30px 24px;
+  }
+
+  .testimonial-text {
+    font-size: 15px;
+  }
+
+  .slider-wrapper {
+    margin-bottom: 30px;
+  }
+}
+
+
+.testimonial-header {
+  position: relative;
+  margin-bottom: 50px;
+}
+ 
+.header-accent {
+  width: 50px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 100%);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+  animation: expandWidth 0.8s ease-out;
+}
+ 
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 50px;
+  }
+}
+ 
+.testimonial-section h2 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
+}
+ 
+.subtext {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+ 
+@media (max-width: 640px) {
+  .testimonial-section h2 {
+    font-size: 28px;
+  }
+ 
+  .subtext {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,51 @@
+.openBtn {
+  padding: 5px 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(205, 235, 37, 0.3);
+}
+
+.openBtn:hover {
+  transform: translateY(-1px);
+}
+
+.openBtn:active {
+  transform: translateY(0);
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+}
+
+.modalBox {
+    position: absolute;
+  top: 150%;
+  width: 500px;
+  max-width: 90%;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.projectInput {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  box-sizing: border-box;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}

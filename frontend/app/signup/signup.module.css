@@ -1,0 +1,177 @@
+:root {
+  --greenColor: #22c55e;
+  --yellowColor: #facc15;
+}
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #f8fafc;
+}
+
+.left {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.content {
+  max-width: 400px;
+}
+
+.content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.content p {
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.formCard {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  padding: 35px;
+  border-radius: 24px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.stepText {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.progressBar {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 50px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.progress {
+  height: 100%;
+  background: var(--greenColor);
+  transition: 0.4s ease;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.input:focus {
+  border-color: var(--greenColor);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+}
+
+.error {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.prevButton,
+.nextButton {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.prevButton {
+  border: 1px solid #ddd;
+  background: white;
+}
+
+.nextButton {
+  border: none;
+  background: var(--yellowColor);
+}
+
+.prevButton:hover,
+.nextButton:hover {
+  transform: translateY(-2px);
+}
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #666;
+  font-size: 18px;
+}
+
+.eyeButton:hover {
+  color: var(--greenColor);
+}
+
+.hint {
+  display: block;
+  margin-top: 8px;
+  color: #666;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .right {
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .formCard {
+    margin: 20px 0;
+  }
+}
+

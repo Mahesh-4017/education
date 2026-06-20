@@ -1,0 +1,137 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --yellowColor: #feea00;
+  --greenColor: #07cc74;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  background: white;
+}
+
+.left {
+  flex: 1;
+  background: linear-gradient(135deg, var(--greenColor), #05a860);
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px;
+}
+
+.left h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.left p {
+  font-size: 18px;
+  max-width: 500px;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.form {
+  width: 100%;
+  max-width: 430px;
+  background: white;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.input {
+  padding: 15px 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--greenColor);
+  box-shadow: 0 0 0 4px rgba(7, 204, 116, 0.15);
+}
+
+.forgot {
+  text-align: right;
+  text-decoration: none;
+  color: var(--greenColor);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+.button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 100px;
+  background: var(--yellowColor);
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(7, 204, 116, 0.3);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    padding: 20px 25px;
+    text-align: center;
+  }
+
+  .left h1 {
+    font-size: 2.8rem;
+  }
+
+  .left p {
+    margin: 0 auto;
+  }
+
+  .right {
+    padding: 25px;
+  }
+
+  .form {
+    padding: 30px 25px;
+  }
+}
