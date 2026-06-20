@@ -205,7 +205,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="featuredSsection">
+      <section className="featuredSection">
         <div className="container">
           <h2 className="heading">Featured Food</h2>
 

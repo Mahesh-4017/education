@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./popupbutton.module.css";
+import styles from "./PopupButton.module.css";
 
-export default function Popupbutton() {
+export default function PopupButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
 
@@ -27,7 +27,7 @@ export default function Popupbutton() {
       setIsOpen(false);
 
      router.push(
-  `/editor/${encodeURIComponent(folderName)}/index.html`
+  `/projects/${encodeURIComponent(folderName)}`
 );
     }
   };

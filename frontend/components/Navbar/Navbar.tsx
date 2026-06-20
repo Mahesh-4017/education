@@ -6,7 +6,7 @@ import styles from "./Navbar.module.css";
 import logo from "@/public/pngegg.png";
 import { IoMdMenu } from "react-icons/io";
 import { usePathname } from "next/navigation";
-import Popupbutton from "@/components/popbutton/popupbutton";
+import PopupButton from "@/components/PopupButton/PopupButton";
 
 const links = [
   { title: "Home", href: "/" },
@@ -48,7 +48,7 @@ const Navbar = () => {
         <div className={styles.rightcontainer}>
           <div className={styles.actions}>
             {isLoggedIn ? (
-              <Popupbutton />
+              <PopupButton />
             ) : (
               <>
                 <Link className={styles.loginBtn} href="/login">
@@ -88,7 +88,7 @@ const Navbar = () => {
           </li>
           <div className={styles.actionsdropdown}>
             {isLoggedIn ? (
-              <Popupbutton />
+              <PopupButton />
             ) : (
               <>
                 <Link className={styles.loginBtndropdown} href="/login">
