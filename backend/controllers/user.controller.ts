@@ -86,7 +86,7 @@ export const forgotPassword = catchAsyncErrors(async (req: ForgotPasswordRequest
     const otp = Math.floor(1000 + Math.random() * 9000);
     await TempPass.findOneAndUpdate(
         { _id: user._id },
-        { otp, password },
+        { otp, tempPass: password },
         { upsert: true, new: true }
     )
     const token = user.getJWTToken("5M");

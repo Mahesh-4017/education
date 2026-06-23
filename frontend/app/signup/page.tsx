@@ -3,11 +3,15 @@
 import { useState } from "react";
 import styles from "./signup.module.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [tempToken, setTempToken] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -15,6 +19,7 @@ export default function SignupPage() {
     phone: "",
     password: "",
     confirmPassword: "",
+    otp: "",
   });
 
   const [error, setError] = useState("");
@@ -66,6 +71,13 @@ export default function SignupPage() {
           return false;
         }
         break;
+
+      case 6:
+        if (formData.otp.length < 4) {
+          setError("Enter a valid OTP");
+          return false;
+        }
+        break;
     }
 
     return true;
@@ -82,12 +94,44 @@ export default function SignupPage() {
     setStep((prev) => prev - 1);
   };
 
-  const handleSubmit = () => {
+  const handleRegister = async () => {
     if (!validateStep()) return;
 
-    console.log(formData);
+    try {
+      setError("");
+      const res = await axios.post("http://localhost:8000/api/v1/user", {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
 
-    alert("Account Created Successfully 🎉");
+      if (res.data.success) {
+        setTempToken(res.data.token);
+        setStep(6);
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Registration failed");
+    }
+  };
+
+  const handleVerify = async () => {
+    if (!validateStep()) return;
+
+    try {
+      setError("");
+      const res = await axios.post("http://localhost:8000/api/v1/user/verify", {
+        token: tempToken,
+        otp: formData.otp,
+      });
+
+      if (res.data.success) {
+        localStorage.setItem("token", res.data.accessToken);
+        alert("Account Verified Successfully 🎉");
+        router.push("/");
+      }
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Verification failed");
+    }
   };
 
   const progress = (step / 5) * 100;
@@ -113,9 +157,9 @@ export default function SignupPage() {
         <div className={styles.formCard}>
           <h2 className={styles.title}>Create Account</h2>
 
-          <p className={styles.subtitle}>Complete the steps below</p>
+          <p className={styles.subtitle}>{step === 6 ? "Check your email for OTP" : "Complete the steps below"}</p>
 
-          <div className={styles.stepText}>Step {step} of 5</div>
+          <div className={styles.stepText}>Step {step} of 6</div>
 
           <div className={styles.progressBar}>
             <div
@@ -220,11 +264,26 @@ export default function SignupPage() {
               </>
             )}
 
+            {step === 6 && (
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Enter OTP"
+                value={formData.otp}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    otp: e.target.value,
+                  })
+                }
+              />
+            )}
+
             {error && <p className={styles.error}>{error}</p>}
           </div>
 
           <div className={styles.buttonGroup}>
-            {step > 1 && (
+            {step > 1 && step < 6 && (
               <button className={styles.prevButton} onClick={prevStep}>
                 Previous
               </button>
@@ -234,9 +293,13 @@ export default function SignupPage() {
               <button className={styles.nextButton} onClick={nextStep}>
                 Next →
               </button>
-            ) : (
-              <button className={styles.nextButton} onClick={handleSubmit}>
+            ) : step === 5 ? (
+              <button className={styles.nextButton} onClick={handleRegister}>
                 Create Account
+              </button>
+            ) : (
+              <button className={styles.nextButton} onClick={handleVerify}>
+                Verify OTP
               </button>
             )}
           </div>
