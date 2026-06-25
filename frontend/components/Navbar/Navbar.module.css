@@ -1,5 +1,6 @@
 :root {
   --yellowColor: #feea00;
+  --greenColor: #1D9E75;
 }
 
 .navbar {
@@ -38,11 +39,11 @@
   font-weight: 700;
   color: #000;
   letter-spacing: -0.4px;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-style: italic;
 }
-/* Navigation */
+
+/* ─── Navigation ─── */
 
 .navLinks {
   display: flex;
@@ -55,7 +56,7 @@
   text-decoration: none;
   color: #222;
   font-weight: 500;
-  transition: 0.3s;
+  transform-origin: center bottom;
 }
 
 .navLinks a::after {
@@ -66,18 +67,39 @@
   width: 0;
   height: 3px;
   border-radius: 20px;
-  background: #07cc74;
+  background: var(--greenColor);
   transition: width 0.3s ease;
 }
 
+/* Un-dim and grow only the hovered link */
 .navLinks a:hover {
-  color: #07cc74;
-  font-weight: 600;
+  /* opacity: 1 !important; */
+  color: var(--greenColor);
+  font-weight: 500;
 }
 
 .navLinks a:hover::after {
   width: 100%;
 }
+
+/* Active / current page link */
+.navLinks a.active {
+  color: var(--greenColor);
+  font-weight: 600;
+}
+
+.navLinks a.active::after {
+  width: 100%;
+}
+
+/* Dim the active link too when a sibling is hovered */
+
+/* Un-dim active link when it is the one being hovered */
+.navLinks a.active:hover {
+  transform: scale(1.07) !important;
+}
+
+/* ─── Action Buttons ─── */
 
 .actions {
   display: flex;
@@ -117,11 +139,15 @@
   box-shadow: 0 12px 25px rgba(254, 234, 0, 0.55);
 }
 
+/* ─── Right container ─── */
+
 .rightcontainer {
   display: flex;
   align-items: center;
   gap: 15px;
 }
+
+/* ─── Mobile menu ─── */
 
 .menucontainer {
   display: none;
@@ -179,7 +205,7 @@
   padding: 14px 16px;
 
   text-decoration: none;
-  color: #222;
+  /* color: #222; */
 
   font-size: 15px;
   font-weight: 500;
@@ -190,8 +216,15 @@
 }
 
 .menudropdown li a:hover {
-  background: #f3f4f6;
-  color: #07cc74;
+  /* background: #f3f4f6; */
+  color: var(--greenColor);
+}
+
+/* Active link in mobile dropdown */
+.menudropdown li a.active {
+  color: var(--greenColor);
+  /* background: #f0faf5; */
+  font-weight: 600;
 }
 
 .actionsdropdown {
@@ -240,6 +273,8 @@
 .signupBtndropdown:hover {
   transform: translateY(-2px);
 }
+
+/* ─── Responsive ─── */
 
 @media (max-width: 952px) {
   .navLinks {

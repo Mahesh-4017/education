@@ -10,7 +10,7 @@ interface Course {
   category: string;
   level: 'Beginner' | 'Intermediate' | 'Advanced';
   instructor: string;
-  price: number | null; // null = free
+  price: number | null;
   duration: string;
   students?: number;
 }
@@ -106,19 +106,29 @@ const courses: Course[] = [
   },
 ];
 
+// Map level → CSS module class
+const levelBadgeClass: Record<Course['level'], string> = {
+  Beginner:     'badgeBeginner',
+  Intermediate: 'badgeIntermediate',
+  Advanced:     'badgeAdvanced',
+};
+
 export default function LearnPage() {
-  const paidCourses = courses.filter(c => c.price !== null).length;
   const freeCourses = courses.filter(c => c.price === null).length;
 
   return (
     <div className={styles.container}>
-      {/* Hero Section */}
+
+      {/* ── Hero ── */}
       <div className={styles.hero}>
         <div className={styles.heroContent}>
-          <h1 className={styles.title}>Learn & Master Your Skills</h1>
+          <h1 className={styles.title}>
+            Learn &amp; <span>Master</span> Your Skills
+          </h1>
           <p className={styles.subtitle}>
-            Explore our curated collection of courses designed to help you grow as a developer and designer. 
-            From fundamentals to advanced topics, we&apos;ve got you covered.
+            Explore our curated collection of courses designed to help you grow as a
+            developer and designer. From fundamentals to advanced topics, we&apos;ve got
+            you covered.
           </p>
           <div className={styles.stats}>
             <div className={styles.stat}>
@@ -127,7 +137,7 @@ export default function LearnPage() {
             </div>
             <div className={styles.stat}>
               <span className={styles.statNumber}>{freeCourses}</span>
-              <span className={styles.statLabel}>Free Courses</span>
+              <span className={styles.statLabel}>Free</span>
             </div>
             <div className={styles.stat}>
               <span className={styles.statNumber}>50K+</span>
@@ -137,59 +147,63 @@ export default function LearnPage() {
         </div>
       </div>
 
-      {/* Courses Grid */}
+      {/* ── Courses Grid ── */}
       <div className={styles.coursesSection}>
-        <h2 className={styles.coursesTitle}>All Courses</h2>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.coursesTitle}>All Courses</h2>
+          <span className={styles.courseCount}>{courses.length} courses available</span>
+        </div>
+
         <div className={styles.grid}>
           {courses.map((course) => (
             <div key={course.id} className={styles.card}>
-  <div className={styles.cardTop}>
-    <div className={styles.badges}>
-      <span className={styles.badge}>{course.level}</span>
-      <span className={styles.badgeCategory}>{course.category}</span>
-    </div>
 
-    <div className={styles.priceSection}>
-      {course.price === null ? (
-        <span className={styles.free}>FREE</span>
-      ) : (
-        <span className={styles.price}>${course.price}</span>
-      )}
-    </div>
-  </div>
+              {/* Top: level badge + category + price */}
+              <div className={styles.cardTop}>
+                <div className={styles.badges}>
+                  <span
+                    className={`${styles.badge} ${styles[levelBadgeClass[course.level]]}`}
+                  >
+                    {course.level}
+                  </span>
+                  <span className={styles.badgeCategory}>{course.category}</span>
+                </div>
+                <div className={styles.priceSection}>
+                  {course.price === null ? (
+                    <span className={styles.free}>Free</span>
+                  ) : (
+                    <span className={styles.price}>${course.price}</span>
+                  )}
+                </div>
+              </div>
 
-  <h3 className={styles.cardTitle}>{course.title}</h3>
+              <h3 className={styles.cardTitle}>{course.title}</h3>
+              <p className={styles.cardDescription}>{course.description}</p>
 
-  <p className={styles.cardDescription}>
-    {course.description}
-  </p>
+              {/* Meta block */}
+              <div className={styles.cardMeta}>
+                <div className={styles.metaBlock}>
+                  <span className={styles.metaLabel}>Instructor</span>
+                  <span className={styles.metaValue}>{course.instructor}</span>
+                </div>
+                <div className={styles.metaBlock}>
+                  <span className={styles.metaLabel}>Duration</span>
+                  <span className={styles.metaValue}>{course.duration}</span>
+                </div>
+                <div className={styles.metaBlock}>
+                  <span className={styles.metaLabel}>Students</span>
+                  <span className={styles.metaValue}>
+                    {course.students?.toLocaleString()}
+                  </span>
+                </div>
+              </div>
 
-  <div className={styles.cardMeta}>
-    <div className={styles.metaBlock}>
-      <span className={styles.metaLabel}>Instructor</span>
-      <span className={styles.metaValue}>{course.instructor}</span>
-    </div>
-
-    <div className={styles.metaBlock}>
-      <span className={styles.metaLabel}>Duration</span>
-      <span className={styles.metaValue}>{course.duration}</span>
-    </div>
-
-    <div className={styles.metaBlock}>
-      <span className={styles.metaLabel}>Students</span>
-      <span className={styles.metaValue}>
-        {course.students?.toLocaleString()}
-      </span>
-    </div>
-  </div>
-
-  <button className={styles.cta}>
-    Enroll Course →
-  </button>
-</div>
+              <button className={styles.cta}>Enroll Now →</button>
+            </div>
           ))}
         </div>
       </div>
+
     </div>
   );
 }

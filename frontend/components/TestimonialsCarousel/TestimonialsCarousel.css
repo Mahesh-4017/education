@@ -4,9 +4,9 @@
 
 .testimonialsSection {
   padding: 96px 0;
-  background: #f9fafb;
-  border-top: 1px solid #e5e7eb;
-  border-bottom: 1px solid #e5e7eb;
+  background: var(--gray-50);
+  border-top: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--gray-200);
 }
 
 .testimonialsContainer {
@@ -35,14 +35,14 @@
   font-weight: 600;
   letter-spacing: 1.8px;
   text-transform: uppercase;
-  color: #0e1725;
+  color: var(--greenColor);
   margin-bottom: 14px;
 }
 
 .testimonialsTitle {
   font-size: 36px;
   font-weight: 700;
-  color: #111827;
+  color: var(--gray-900);
   line-height: 1.25;
   letter-spacing: -0.3px;
   margin: 0 0 16px;
@@ -50,7 +50,7 @@
 
 .testimonialsSubtext {
   font-size: 15px;
-  color: #6b7280;
+  color: var(--gray-500);
   line-height: 1.7;
   margin: 0 0 32px;
   max-width: 340px;
@@ -64,26 +64,26 @@
   margin-bottom: 36px;
   padding: 14px 18px;
   background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
   width: fit-content;
 }
 
 .ratingStars {
   font-size: 16px;
-  color: #f59e0b;
+  color: #7a6000;
   letter-spacing: 2px;
 }
 
 .ratingValue {
   font-size: 18px;
   font-weight: 700;
-  color: #111827;
+  color: var(--gray-900);
 }
 
 .ratingCount {
   font-size: 13px;
-  color: #9ca3af;
+  color: var(--gray-400);
 }
 
 /* Navigation Dots */
@@ -98,20 +98,20 @@
   height: 8px;
   border-radius: 50%;
   border: none;
-  background: #d1d5db;
+  background: var(--gray-200);
   cursor: pointer;
   padding: 0;
   transition: background 0.3s ease, width 0.3s ease, border-radius 0.3s ease;
 }
 
 .testimonialDotActive {
-  background: #101928;
+  background: var(--greenColor);
   width: 28px;
   border-radius: 4px;
 }
 
 .testimonialDot:hover:not(.testimonialDotActive) {
-  background: #9ca3af;
+  background: var(--gray-400);
 }
 
 /* ======================================================
@@ -127,16 +127,16 @@
 /* Active Card */
 .testimonialActiveCard {
   background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
   padding: 40px 36px;
   position: relative;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
 }
 
 .testimonialQuoteMark {
   font-size: 80px;
-  color: #f3f4f6;
+  color: var(--gray-100);
   position: absolute;
   top: 10px;
   right: 24px;
@@ -148,7 +148,7 @@
 
 .testimonialText {
   font-size: 16px;
-  color: #374151;
+  color: var(--gray-700);
   line-height: 1.85;
   margin: 0 0 24px;
   position: relative;
@@ -157,7 +157,7 @@
 
 .testimonialStars {
   font-size: 15px;
-  color: #f59e0b;
+  color: #7a6000;
   letter-spacing: 2px;
   margin-bottom: 24px;
 }
@@ -167,7 +167,7 @@
   align-items: center;
   gap: 14px;
   padding-top: 20px;
-  border-top: 1px solid #f3f4f6;
+  border-top: 1px solid var(--gray-100);
 }
 
 .testimonialUserImage {
@@ -175,20 +175,20 @@
   height: 52px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--gray-200);
   flex-shrink: 0;
 }
 
 .testimonialUserName {
   font-size: 15px;
   font-weight: 600;
-  color: #111827;
+  color: var(--gray-900);
   margin: 0 0 3px;
 }
 
 .testimonialUserRole {
   font-size: 13px;
-  color: #9ca3af;
+  color: var(--gray-400);
 }
 
 /* Thumbnail Row */
@@ -203,8 +203,8 @@
   align-items: center;
   gap: 10px;
   background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
   padding: 12px 14px;
   cursor: pointer;
   text-align: left;
@@ -212,8 +212,8 @@
 }
 
 .testimonialThumb:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.12);
+  border-color: var(--greenColor);
+  box-shadow: 0 2px 8px rgba(29, 158, 117, 0.15);
 }
 
 .testimonialThumbImage {
@@ -221,7 +221,7 @@
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--gray-200);
   flex-shrink: 0;
 }
 
@@ -234,7 +234,7 @@
 .testimonialThumbName {
   font-size: 13px;
   font-weight: 600;
-  color: #111827;
+  color: var(--gray-900);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -242,7 +242,7 @@
 
 .testimonialThumbRole {
   font-size: 12px;
-  color: #9ca3af;
+  color: var(--gray-400);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

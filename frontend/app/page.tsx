@@ -311,7 +311,7 @@ export default function Home() {
             {/* Right: Hero Image */}
             <div className="imageWrapper">
               <Image
-                src="/notion.png"
+                src="/notion1.png"
                 alt="Hero Image"
                 width={500}
                 height={400}
@@ -379,7 +379,7 @@ export default function Home() {
             <div className="processRight">
               <div className="processImageWrap">
                 <Image
-                  src="/kids.avif"
+                  src="/kids1.png"
                   alt="Students learning"
                   width={560}
                   height={480}
