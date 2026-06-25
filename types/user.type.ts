@@ -27,4 +27,19 @@ declare global {
     updatedAt: Date;
     createdAt: Date;
   }
+
+  interface User {
+    // success: true,
+    // user: {
+    avatar?: {
+      public_id: string;
+      url: string;
+    };
+    _id: string;
+    name: string;
+    email: string;
+    // };
+    // token: string;
+  }
+
 }

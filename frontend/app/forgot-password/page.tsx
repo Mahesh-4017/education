@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import styles from "./forgot-password.module.css";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "../../store/index";
+import { forgotPassword, resetPassword } from "../../store/user";
 
 const ForgotPasswordPage = () => {
   const router = useRouter();
@@ -14,6 +15,7 @@ const ForgotPasswordPage = () => {
   const [tempToken, setTempToken] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleRequestReset = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,17 +27,21 @@ const ForgotPasswordPage = () => {
     try {
       setLoading(true);
       setError("");
-      const res = await axios.post("http://localhost:8000/api/v1/user/forgotPassword", {
+      
+      const resultAction = await dispatch(forgotPassword({
         email,
         password: newPassword,
-      });
+      }));
+      const payload: any = resultAction.payload;
 
-      if (res.data.success) {
-        setTempToken(res.data.token);
+      if (payload && payload.success !== false) {
+        setTempToken(payload.token);
         setStep(2);
+      } else {
+        setError(payload?.message || "Failed to request password reset.");
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to request password reset.");
+      setError("Failed to request password reset.");
     } finally {
       setLoading(false);
     }
@@ -51,17 +57,21 @@ const ForgotPasswordPage = () => {
     try {
       setLoading(true);
       setError("");
-      const res = await axios.post("http://localhost:8000/api/v1/user/resetPassword", {
+      
+      const resultAction = await dispatch(resetPassword({
         token: tempToken,
         otp,
-      });
+      }));
+      const payload: any = resultAction.payload;
 
-      if (res.data.success) {
+      if (payload && payload.success !== false) {
         alert("Password reset successfully 🎉");
         router.push("/login");
+      } else {
+        setError(payload?.message || "Failed to reset password.");
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || "Failed to reset password.");
+      setError("Failed to reset password.");
     } finally {
       setLoading(false);
     }

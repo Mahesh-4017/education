@@ -3,8 +3,9 @@
 import { useState } from "react";
 import styles from "./signup.module.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "../../store/index";
+import { signupUser, verifyUser } from "../../store/user";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -23,6 +24,7 @@ export default function SignupPage() {
   });
 
   const [error, setError] = useState("");
+  const dispatch = useAppDispatch();
 
   const validateStep = () => {
     setError("");
@@ -99,18 +101,22 @@ export default function SignupPage() {
 
     try {
       setError("");
-      const res = await axios.post("http://localhost:8000/api/v1/user", {
+      
+      const resultAction = await dispatch(signupUser({
         name: formData.name,
         email: formData.email,
         password: formData.password,
-      });
+      }));
+      const payload: any = resultAction.payload;
 
-      if (res.data.success) {
-        setTempToken(res.data.token);
+      if (payload && payload.success !== false) {
+        setTempToken(payload.token);
         setStep(6);
+      } else {
+        setError(payload?.message || "Registration failed");
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || "Registration failed");
+      setError("Registration failed");
     }
   };
 
@@ -119,23 +125,26 @@ export default function SignupPage() {
 
     try {
       setError("");
-      const res = await axios.post("http://localhost:8000/api/v1/user/verify", {
+      
+      const resultAction = await dispatch(verifyUser({
         token: tempToken,
         otp: formData.otp,
-      });
+      }));
+      const payload: any = resultAction.payload;
 
-      if (res.data.success) {
-  localStorage.setItem("token", res.data.token);
-  localStorage.setItem("userName", res.data.user.name);
-  localStorage.setItem("userEmail", res.data.user.email);
-
-  if (res.data.user.avatar) {
-    localStorage.setItem("userAvatar", res.data.user.avatar || "");
-  } router.refresh();
-  router.push("/");
-}
+      if (payload && payload.success !== false) {
+        localStorage.setItem("userName", payload.user.name);
+        localStorage.setItem("userEmail", payload.user.email);
+        if (payload.user.avatar) {
+          localStorage.setItem("userAvatar", payload.user.avatar || "");
+        }
+        router.refresh();
+        router.push("/");
+      } else {
+        setError(payload?.message || "Verification failed");
+      }
     } catch (err: any) {
-      setError(err.response?.data?.message || "Verification failed");
+      setError("Verification failed");
     }
   };
 

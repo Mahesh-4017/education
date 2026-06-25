@@ -7,6 +7,7 @@ import logo from "@/public/pngegg.png";
 import { IoMdMenu } from "react-icons/io";
 import { usePathname } from "next/navigation";
 import UserMenu from "@/components/Usermenu/Usermenu";
+import { useAppSelector } from "@/store";
 
 const links = [
   { title: "Home", href: "/" },
@@ -17,15 +18,8 @@ const links = [
 ];
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsLoggedIn(!!token);
-  }, []);
-
+  const { userInfo } = useAppSelector((state) => state.user)
   const hideNavbarRoutes = ["/login", "/signup"];
   if (pathname && hideNavbarRoutes.includes(pathname)) return null;
 
@@ -55,8 +49,8 @@ const Navbar = () => {
           {/* Right side */}
           <div className={styles.rightcontainer}>
             <div className={styles.actions}>
-              {isLoggedIn ? (
-                <UserMenu onLogout={() => setIsLoggedIn(false)} />
+              {userInfo?._id ? (
+                <UserMenu user={userInfo} />
               ) : (
                 <>
                   <Link className={styles.loginBtn} href="/login">
@@ -93,9 +87,8 @@ const Navbar = () => {
           ))}
 
           <div className={styles.actionsdropdown}>
-            {isLoggedIn ? (
-              /* Inline user section for mobile */
-              <UserMenu onLogout={() => setIsLoggedIn(false)} />
+            {userInfo?._id ? (
+              <UserMenu />
             ) : (
               <>
                 <Link className={styles.loginBtndropdown} href="/login">

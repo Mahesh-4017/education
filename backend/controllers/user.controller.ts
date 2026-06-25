@@ -70,7 +70,7 @@ export const login = catchAsyncErrors(async (req: LoginRequest, res: Response, n
 })
 export const tokenLogin = catchAsyncErrors(async (req: TokenRequest, res: Response, next: NextFunction) => {
     const { token } = req.body
-    const verifyToken = jwt.verify(token, process.env.JWT_SECRET!) as { id: string };
+    const verifyToken = jwt.verify(token, process.env.JWT_SECRET) as { id: string };
     if (!verifyToken) return next(new ErrorHandler('Session is Expired', 401));
     const user = await User.findById({ _id: verifyToken.id })
     if (!user) return next(new ErrorHandler('User not found', 400));

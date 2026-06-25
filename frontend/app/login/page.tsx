@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import styles from "./login.module.css";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "../../store/index";
+import { loginUser } from "../../store/user";
 
 const Page = () => {
   const router = useRouter();
@@ -13,38 +14,25 @@ const Page = () => {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const dispatch = useAppDispatch();
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      setError("Please fill in all fields"); 
+      setError("Please fill in all fields");
       return;
     }
-
-    try {
-      setLoading(true);
-      setError("");
-      const res = await axios.post("http://localhost:8000/api/v1/user/login", {
-        email: formData.email,
-        password: formData.password,
-      });
-
-      if (res.data.success) {
-  localStorage.setItem("token", res.data.token);
-
-  localStorage.setItem("userName", res.data.user.name);
-  localStorage.setItem("userEmail", res.data.user.email);
-
-  if (res.data.user.avatar) {
-    localStorage.setItem("userAvatar", res.data.user.avatar || "");
-  }
-
-  router.push("/");
-}
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
+    setLoading(true);
+    setError("");
+    const payload = await dispatch(loginUser({
+      email: formData.email,
+      password: formData.password,
+    })).unwrap();
+    if (payload.success) {
+      console.log("Success", payload)
+      router.push("/");
+    } else {
+      console.log("Failed", payload)
+      setError(payload?.message || "Login failed");
     }
   };
 

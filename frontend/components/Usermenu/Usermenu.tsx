@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import styles from "./Usermenu.module.css";
 
 // ── icons (react-icons/fi) ──────────────────────────────────────────────────
@@ -13,14 +11,10 @@ import {
   FiLogOut,
   FiChevronDown,
 } from "react-icons/fi";
-
-// ── types ───────────────────────────────────────────────────────────────────
+import Link from "next/link";
 interface UserMenuProps {
-  /** Called after logout so the parent can update its isLoggedIn state */
-  onLogout?: () => void;
+  user: User
 }
-
-// ── helpers ─────────────────────────────────────────────────────────────────
 function getInitials(name: string): string {
   return name
     .split(" ")
@@ -29,17 +23,9 @@ function getInitials(name: string): string {
     .toUpperCase()
     .slice(0, 2);
 }
-
-// ── component ────────────────────────────────────────────────────────────────
-const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
-  const router = useRouter();
+const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState({ name: "User", email: "", avatar: "" });
   const ref = useRef<HTMLDivElement>(null);
-
-
-
-  // Close on outside click
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
@@ -50,15 +36,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("userAvatar");
-    setOpen(false);
-    onLogout?.();
-    router.push("/login");
-  };
 
   const menuItems = [
     { label: "Dashboard", href: "/dashboard", icon: <FiGrid /> },
@@ -66,7 +43,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
     { label: "My Courses", href: "/learn", icon: <FiBookOpen /> },
     { label: "Settings", href: "/settings", icon: <FiSettings /> },
   ];
-
+  console.log(user);
+  if (!user) {
+    return <div>user not found</div>;
+  }
   return (
     <div className={styles.wrapper} ref={ref}>
       {/* ── Trigger ── */}
@@ -77,8 +57,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
         aria-expanded={open}
       >
         <span className={styles.avatar}>
-          {user.avatar ? (
-            <img src={user.avatar} alt={user.name} />
+          {user?.avatar?.url ? (
+            <img src={user.avatar.url} alt={user.name} />
           ) : (
             getInitials(user.name)
           )}
@@ -97,8 +77,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
         {/* User header */}
         <div className={styles.dropdownHeader}>
           <span className={styles.dropdownAvatar}>
-            {user.avatar ? (
-              <img src={user.avatar} alt={user.name} />
+            {user?.avatar?.url ? (
+              <img src={user?.avatar.url} alt={user.name} />
             ) : (
               getInitials(user.name)
             )}
@@ -133,7 +113,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
             <button
               className={`${styles.menuItem} ${styles.logoutItem}`}
               role="menuitem"
-              onClick={handleLogout}
             >
               <span className={styles.menuIcon}>
                 <FiLogOut />
