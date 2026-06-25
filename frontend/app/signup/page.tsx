@@ -125,10 +125,15 @@ export default function SignupPage() {
       });
 
       if (res.data.success) {
-        localStorage.setItem("token", res.data.accessToken);
-        alert("Account Verified Successfully 🎉");
-        router.push("/");
-      }
+  localStorage.setItem("token", res.data.token);
+  localStorage.setItem("userName", res.data.user.name);
+  localStorage.setItem("userEmail", res.data.user.email);
+
+  if (res.data.user.avatar) {
+    localStorage.setItem("userAvatar", res.data.user.avatar || "");
+  } router.refresh();
+  router.push("/");
+}
     } catch (err: any) {
       setError(err.response?.data?.message || "Verification failed");
     }

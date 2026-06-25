@@ -6,16 +6,19 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  max-width: 1400px;
-  width: 90%;
+  width: 100%;
+}
+
+.innernavbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: auto;
   height: 80px;
+  max-width: 1400px;
 }
 
 .logoSection {
@@ -35,7 +38,8 @@
   font-weight: 700;
   color: #000;
   letter-spacing: -0.4px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-style: italic;
 }
 /* Navigation */

@@ -1,148 +1,317 @@
+// =========================
+// IMPORTS
+// =========================
 import Image from "next/image";
-import { ShieldCheck, Truck, BadgeCheck } from "lucide-react";
+import {
+  ShieldCheck,
+  Brain,
+  BadgeCheck,
+  Star,
+  Users,
+  BookOpen,
+  Award,
+  ArrowRight,
+  CheckCircle2,
+  Play,
+} from "lucide-react";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel/TestimonialsCarousel";
+import { Clock, Zap } from "lucide-react";
 
-const PLANS = [
+interface Course {
+  id: number;
+  title: string;
+  desc: string;
+  image: string;
+  rating: number;
+  students: string;
+  duration?: string;
+  tag: string;
+  tagColor: string;
+  icon: string;
+  iconBg: string;
+  level?: "Beginner" | "Intermediate" | "Advanced";
+}
+
+// =========================
+// COURSES DATA
+// =========================
+const COURSES: Course[] = [
   {
     id: 1,
-    name: "Starter",
-    newPrice: "$29",
-    oldPrice: "$49",
-    desc: "Perfect for getting started",
-    features: ["Up to 5 projects", "Basic support", "1GB storage", "Community access"],
+    title: "Web Development",
+    desc: "HTML, CSS, JavaScript & React",
+    image: "/Images/images1.jfif",
+    rating: 4.9,
+    students: "12.4k",
+    duration: "24 weeks",
+    tag: "Popular",
+    tagColor: "tagBlue",
+    icon: "💻",
+    iconBg: "iconBgBlue",
+    level: "Beginner",
   },
   {
     id: 2,
-    name: "Professional",
-    newPrice: "$79",
-    oldPrice: "$129",
-    desc: "For growing teams",
-    features: ["Unlimited projects", "Priority support", "100GB storage", "Advanced analytics", "API access"],
+    title: "Data Science & AI",
+    desc: "Python, Machine Learning & Neural Networks",
+    image: "/Images/images6.jfif",
+    rating: 4.8,
+    students: "9.1k",
+    duration: "20 weeks",
+    tag: "Trending",
+    tagColor: "tagAmber",
+    icon: "🧠",
+    iconBg: "iconBgAmber",
+    level: "Intermediate",
+  },
+  {
+    id: 3,
+    title: "UI/UX Design",
+    desc: "Figma, Prototyping & User Research",
+    image: "/Images/images5.jpg",
+    rating: 4.7,
+    students: "7.3k",
+    duration: "16 weeks",
+    tag: "New",
+    tagColor: "tagGreen",
+    icon: "🎨",
+    iconBg: "iconBgGreen",
+    level: "Beginner",
+  },
+  {
+    id: 4,
+    title: "Digital Marketing",
+    desc: "SEO, Social Media & Growth Strategy",
+    image: "/Images/images4.jfif",
+    rating: 4.8,
+    students: "8.5k",
+    duration: "12 weeks",
+    tag: "Popular",
+    tagColor: "tagBlue",
+    icon: "📊",
+    iconBg: "iconBgPurple",
+    level: "Beginner",
+  },
+  {
+    id: 5,
+    title: "Cyber Security",
+    desc: "Protect systems and networks from threats",
+    image: "/Images/images3.jfif",
+    rating: 4.9,
+    students: "5.6k",
+    duration: "18 weeks",
+    tag: "Hot",
+    tagColor: "tagRed",
+    icon: "🛡️",
+    iconBg: "iconBgRed",
+    level: "Advanced",
+  },
+  {
+    id: 6,
+    title: "Mobile App Dev",
+    desc: "Build Android & iOS applications",
+    image: "/Images/images2.jfif",
+    rating: 4.8,
+    students: "6.2k",
+    duration: "22 weeks",
+    tag: "New",
+    tagColor: "tagGreen",
+    icon: "📱",
+    iconBg: "iconBgTeal",
+    level: "Intermediate",
+  },
+];
+
+// =========================
+// PRICING PLANS DATA
+// =========================
+const PLANS = [
+  {
+    id: 1,
+    name: "Basic",
+    newPrice: "$19",
+    oldPrice: "$39",
+    desc: "Perfect for beginners starting their learning journey",
+    features: [
+      "Access to 10 courses",
+      "Student Community",
+      "Download Notes",
+      "Basic Support",
+    ],
+  },
+  {
+    id: 2,
+    name: "Pro",
+    newPrice: "$49",
+    oldPrice: "$89",
+    desc: "Best for serious learners who want results",
+    features: [
+      "Unlimited Courses",
+      "Live Classes",
+      "Assignments & Projects",
+      "Certificates",
+      "Priority Support",
+    ],
     featured: true,
   },
   {
     id: 3,
-    name: "Enterprise",
-    newPrice: "$199",
-    oldPrice: "$299",
-    desc: "For large organizations",
-    features: ["Everything in Pro", "Dedicated manager", "Custom integrations", "SLA guarantee", "White-label option"],
+    name: "Academy",
+    newPrice: "$99",
+    oldPrice: "$149",
+    desc: "Complete solution with career support",
+    features: [
+      "Everything in Pro",
+      "1-on-1 Mentorship",
+      "Career Guidance",
+      "Internship Support",
+      "Placement Assistance",
+    ],
   },
 ];
 
-const products = [
-  {
-    id: 1,
-    title: "Ocean Waves",
-    desc: "Calm sea waves touching the shore under a peaceful sky",
-    image: "/Images/images2.jfif",
-    rating: 4.5,
-  },
-  {
-    id: 2,
-    title: "Mountain Peaks",
-    desc: "Snow-covered mountains touching the clouds",
-    image: "/Images/images3.jfif",
-    rating: 4.7,
-  },
-  {
-    id: 3,
-    title: "Black & White Sea",
-    desc: "Moody monochrome ocean view with dramatic waves",
-    image: "/Images/images4.jfif",
-    rating: 4.6,
-  },
-  {
-    id: 4,
-    title: "Ocean Waves",
-    desc: "Calm sea waves touching the shore under a peaceful sky",
-    image: "/Images/images3.jfif",
-    rating: 4.5,
-  },
-  {
-    id: 5,
-    title: "Mountain Peaks",
-    desc: "Snow-covered mountains touching the clouds",
-    image: "/Images/images2.jfif",
-    rating: 4.7,
-  },
-  {
-    id: 6,
-    title: "Black & White Sea",
-    desc: "Moody monochrome ocean view with dramatic waves",
-    image: "/Images/images1.jfif",
-    rating: 4.6,
-  },
-];
-
+// =========================
+// BENEFITS DATA
+// =========================
 const BENEFITS = [
   {
     icon: ShieldCheck,
-    title: "Best Quality",
-    text: "All of our furniture uses the best materials and finishes for our customers.",
+    title: "Certified Courses",
+    text: "Earn industry-recognized certificates after completing your course.",
+    color: "benefitBlue",
   },
   {
-    icon: Truck,
-    title: "Free Shipping",
-    text: "Free shipping everywhere you buy furniture from us without exception.",
+    icon: Brain,
+    title: "Learn Anywhere",
+    text: "Access all your courses anytime from desktop, tablet, or mobile.",
+    color: "benefitAmber",
   },
   {
     icon: BadgeCheck,
-    title: "Warranty",
-    text: "Every time you buy our furniture products, you will get a warranty without exception.",
+    title: "Expert Instructors",
+    text: "Learn directly from experienced professionals and top mentors.",
+    color: "benefitGreen",
   },
 ];
 
+// =========================
+// STEPS DATA
+// =========================
 const STEPS = [
   {
-    number: 1,
-    title: "Briefing",
-    text: "We start by understanding your requirements and planning the structure for a smooth experience.",
+    number: "01",
+    title: "Choose a course",
+    text: "Browse 120+ expert-led courses across tech, design, and business.",
+    icon: BookOpen,
   },
   {
-    number: 2,
-    title: "Processing",
-    text: "We carefully design and process each part to ensure high quality and clean execution.",
+    number: "02",
+    title: "Learn at your pace",
+    text: "Watch lessons, complete projects, and practice with real assignments.",
+    icon: Play,
   },
   {
-    number: 3,
-    title: "Finishing",
-    text: "Final touches are added to ensure everything is polished and ready for delivery.",
+    number: "03",
+    title: "Get certified",
+    text: "Earn a certificate and showcase your skills to employers worldwide.",
+    icon: Award,
   },
 ];
 
+// =========================
+// STATS DATA
+// =========================
+const STATS = [
+  { value: "40k+", label: "Active Students" },
+  { value: "120+", label: "Expert Courses" },
+  { value: "4.9★", label: "Average Rating" },
+  { value: "95%", label: "Job Placement" },
+];
+
+const STATS_BANNER = [
+  {
+    value: "40,000+",
+    label: "Active Students",
+    icon: Users,
+    color: "statBlue",
+  },
+  {
+    value: "120+",
+    label: "Expert Courses",
+    icon: BookOpen,
+    color: "statAmber",
+  },
+  {
+    value: "4.9 / 5",
+    label: "Average Rating",
+    icon: Star,
+    color: "statYellow",
+  },
+  {
+    value: "95%",
+    label: "Job Placement",
+    icon: Award,
+    color: "statGreen",
+  },
+  {
+    value: "50+",
+    label: "Expert Instructors",
+    icon: BadgeCheck,
+    color: "statPurple",
+  },
+];
+
+// =========================
+// HOME PAGE COMPONENT
+// =========================
 export default function Home() {
   return (
     <>
+      {/* ================= HERO SECTION ================= */}
       <section className="heroSection">
+        {/* Decorative background blobs */}
+        <div className="floatingBox1" />
+        <div className="floatingBox2" />
+
         <div className="container">
-          <div className="floatingBox1" />
-          <div className="floatingBox2" />
-
-          <div className="heroGrid">
-            <div className="content">
+          <div className="heroInner">
+            {/* Left: Text Content */}
+            <div className="heroContent">
               <div className="accentBar" />
-              <p className="label">Build & Create</p>
 
-              <h1 className="title">
-                Make something <br />
-                <span className="highlight">beautiful</span>
+              <h1 className="heroTitle">
+                Learn skills that
+                <br />
+                build your <span className="heroHighlight">future</span>
               </h1>
 
-              <p className="description">
-                Simple tools for creating amazing projects. No complexity, just
-                pure creativity.
+              <p className="heroDesc">
+                Join 40,000+ students learning technology, design, and business
+                from real industry professionals — at your own pace.
               </p>
 
-              <div className="buttonGroup">
-                <button className="buttonPrimary">Start Now</button>
-                <button className="buttonSecondary">Learn More</button>
+              <div className="heroActions">
+                <button className="btnEnroll">
+                  Enroll now <ArrowRight size={16} />
+                </button>
+                <button className="btnBrowse">Browse courses</button>
+              </div>
+
+              {/* Stats Row */}
+              <div className="heroStats">
+                {STATS.map((s, i) => (
+                  <div className="heroStatItem" key={i}>
+                    <span className="heroStatValue">{s.value}</span>
+                    <span className="heroStatLabel">{s.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
+            {/* Right: Hero Image */}
             <div className="imageWrapper">
               <Image
-                src="/notion.webp"
+                src="/notion.png"
                 alt="Hero Image"
                 width={500}
                 height={400}
@@ -154,138 +323,234 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ================= BENEFITS SECTION ================= */}
       <section className="benefitsSection">
         <div className="container">
-          <div className="sectionHeader">
-            <span className="line" />
-            <h2>Benefits you get when using our services</h2>
-            <span className="line" />
-          </div>
+          <div className="sectionLabel">Why students choose us</div>
 
           <div className="benefitsGrid">
-            {BENEFITS.map(({ icon: Icon, title, text }) => (
-              <div className="benefitCard" key={title}>
-                <Icon className="icon" />
-                <h3>{title}</h3>
-                <p>{text}</p>
+            {BENEFITS.map(({ icon: Icon, title, text, color }) => (
+              <div className={`benefitCard ${color}`} key={title}>
+                <div className="benefitIconWrap">
+                  <Icon size={22} />
+                </div>
+                <h3 className="benefitTitle">{title}</h3>
+                <p className="benefitText">{text}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+      {/* ================= PROCESS SECTION ================= */}
       <section className="processSection">
-        <div className="container processGrid">
-          <div className="processContent">
-            <h2 className="processTitle">
-              We provide the best <br />
-              process experience
-            </h2>
+        <div className="container">
+          <div className="processLayout">
+            {/* Left */}
+            <div className="processLeft">
+              <div className="sectionLabel">How it works</div>
+              <h2 className="processTitle">
+                Three steps to your
+                <br />
+                next opportunity
+              </h2>
+              <p className="processSubtitle">
+                A simple, guided journey from beginner to job-ready — no
+                experience needed.
+              </p>
 
-            {STEPS.map(({ number, title, text }) => (
-              <div className="step" key={number}>
-                <div className="circle">{number}</div>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
+              <div className="stepsList">
+                {STEPS.map(({ number, title, text, icon: Icon }) => (
+                  <div className="stepItem" key={number}>
+                    <div className="stepNumber">{number}</div>
+                    <div className="stepBody">
+                      <div className="stepIconRow">
+                        <Icon size={16} />
+                        <h3 className="stepTitle">{title}</h3>
+                      </div>
+                      <p className="stepText">{text}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Image with overlay card */}
+            <div className="processRight">
+              <div className="processImageWrap">
+                <Image
+                  src="/kids.avif"
+                  alt="Students learning"
+                  width={560}
+                  height={480}
+                  className="processImg"
+                />
+                <div className="processFloatCard">
+                  <div className="floatCardRow">
+                    <div className="floatAvatars">
+                      <span className="floatAvatar">A</span>
+                      <span className="floatAvatar">B</span>
+                      <span className="floatAvatar">C</span>
+                    </div>
+                    <div>
+                      <p className="floatCardValue">2,400+</p>
+                      <p className="floatCardLabel">enrolled this month</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= COURSES SECTION ================= */}
+      <section className="coursesSection">
+        <div className="container">
+          {/* Header */}
+          <div className="coursesSectionHeader">
+            <div>
+              <div className="sectionLabel">What you&apos;ll learn</div>
+              <h2 className="coursesTitle">Popular courses</h2>
+              <p className="coursesSubtitle">
+                Master in-demand skills with expert instructors
+              </p>
+            </div>
+            <button className="viewAllBtn">
+              View all courses
+              <ArrowRight size={16} strokeWidth={2.5} />
+            </button>
+          </div>
+
+          {/* Responsive Grid */}
+          <div className="coursesGrid">
+            {COURSES.map((course) => (
+              <div className="courseCard" key={course.id}>
+                {/* Image Section */}
+                <div className="courseImageContainer">
+                  <Image
+                    src={course.image}
+                    alt={course.title}
+                    width={400}
+                    height={220}
+                    className="courseImage"
+                    priority={course.id <= 3}
+                  />
+                  <div className="imageOverlay">
+                    <button className="exploreBtn">
+                      Explore
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+
+                  {/* Tag */}
+                  <span className={`courseTag ${course.tagColor}`}>
+                    {course.tag}
+                  </span>
+
+                  {/* Level Badge */}
+                  {course.level && (
+                    <span
+                      className={`courseLevelBadge level-${course.level.toLowerCase()}`}
+                    >
+                      {course.level}
+                    </span>
+                  )}
+                </div>
+
+                {/* Content Section */}
+                <div className="courseCardContent">
+                  <div className="courseCardHeader">
+                    <div className={`courseIcon ${course.iconBg}`}>
+                      {course.icon}
+                    </div>
+                    <h3 className="courseCardTitle">{course.title}</h3>
+                  </div>
+
+                  <p className="courseCardDesc">{course.desc}</p>
+
+                  {/* Meta Information */}
+                  <div className="courseMetaSection">
+                    <div className="metaItem">
+                      <Star size={14} className="metaIcon" />
+                      <span className="metaText">{course.rating}</span>
+                    </div>
+                    <div className="metaItem">
+                      <Users size={14} className="metaIcon" />
+                      <span className="metaText">{course.students}</span>
+                    </div>
+                    {course.duration && (
+                      <div className="metaItem">
+                        <Clock size={14} className="metaIcon" />
+                        <span className="metaText">{course.duration}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Footer CTA */}
+                  <button className="enrollBtn">
+                    Enroll now
+                    <Zap size={14} />
+                  </button>
                 </div>
               </div>
             ))}
           </div>
-
-          <div className="processImage">
-            <Image
-              src="/kids.avif"
-              alt="Process"
-              width={600}
-              height={500}
-              className="img"
-            />
-          </div>
         </div>
       </section>
 
-      <section className="featuredSection">
-        <div className="container">
-          <h2 className="heading">Featured Food</h2>
-
-          <div className="grid">
-            {/* LEFT BIG CARD */}
-            <div className="mainCard">
-              <Image
-                src="/Images/images6.jfif"
-                alt="Main Product"
-                width={200}
-                height={200}
-                className="mainImage1"
-              />
-              <Image
-                src="/Images/images5.jpg"
-                alt="Main Product"
-                width={500}
-                height={200}
-                className="mainImage"
-              />
-            </div>
-
-            {/* RIGHT GRID */}
-            <div className="sideGrid">
-              {products.map((item) => (
-                <div key={item.id} className="featuredcard">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={200}
-                    height={150}
-                    className="featuredimage"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
+      {/* ================= TESTIMONIALS SECTION ================= */}
       <TestimonialsCarousel />
 
+      {/* ================= PRICING SECTION ================= */}
       <section className="pricingSection">
         <div className="container">
-          <div className="pricingHeader">
-            <div className="headerAccent"></div>
-            <h2>Pricing Plans</h2>
-            <p className="headerSubtext">Choose the perfect plan for your needs</p>
+          <div className="pricingSectionHeader">
+            <div className="sectionLabel">Pricing</div>
+            <h2 className="pricingTitle">Simple, transparent pricing</h2>
+            <p className="pricingSubtitle">
+              Pick the plan that fits your learning goals. Upgrade anytime.
+            </p>
           </div>
 
           <div className="pricingGrid">
             {PLANS.map((plan) => (
               <div
-                className={`pricingCard ${plan.featured ? "featured" : ""}`}
                 key={plan.id}
+                className={`pricingCard ${plan.featured ? "pricingCardFeatured" : ""}`}
               >
-                {plan.featured && <div className="badge">Most Popular</div>}
+                {plan.featured && (
+                  <div className="popularBadge">Most popular</div>
+                )}
 
-                <h3 className="planName">{plan.name}</h3>
-                <p className="planDesc">{plan.desc}</p>
-
-                <div className="priceSection">
-                  <div className="priceDisplay">
-                    <span className="newPrice">{plan.newPrice}</span>
-                    <span className="period">/month</span>
-                  </div>
-                  <span className="oldPrice">{plan.oldPrice}</span>
+                <div className="pricingCardTop">
+                  <h3 className="planName">{plan.name}</h3>
+                  <p className="planDesc">{plan.desc}</p>
                 </div>
 
-                <ul className="featureList">
+                <div className="priceRow">
+                  <span className="priceNew">{plan.newPrice}</span>
+                  <div className="priceRight">
+                    <span className="priceOld">{plan.oldPrice}</span>
+                    <span className="pricePeriod">/month</span>
+                  </div>
+                </div>
+
+                <ul className="featuresList">
                   {plan.features.map((f) => (
-                    <li key={f}>
-                      <span className="checkmark">✓</span>
+                    <li key={f} className="featureItem">
+                      <CheckCircle2 size={15} className="featureCheck" />
                       {f}
                     </li>
                   ))}
                 </ul>
 
-                <button className={`btn ${plan.featured ? "btnPrimary" : "btnSecondary"}`}>
-                  Choose Plan
+                <button
+                  className={
+                    plan.featured ? "planBtnPrimary" : "planBtnSecondary"
+                  }
+                >
+                  Get started
                 </button>
               </div>
             ))}

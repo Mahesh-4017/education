@@ -1,0 +1,618 @@
+.container {
+  width: 100%;
+  background: #ffffff;
+}
+
+/* Hero / Stats Dashboard */
+.hero {
+  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+  border-bottom: 1px solid #f0f0f0;
+  padding: 80px 20px;
+}
+
+.heroContent {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #666;
+  margin: 0 0 50px 0;
+  line-height: 1.6;
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.statCard {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.statCard:hover {
+  border-color: #d0d0d0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.statValue {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.streakValue {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ea8533;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.streakFlame {
+  font-size: 28px;
+  animation: flicker 1.5s ease-in-out infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #999;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+.statSubtext {
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 8px;
+}
+
+.statBar {
+  width: 100%;
+  height: 6px;
+  background: #f0f0f0;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.statFill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.levelProgress {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.levelDot {
+  width: 8px;
+  height: 8px;
+  background: #e8e8e8;
+  border-radius: 50%;
+}
+
+.levelDot:nth-child(1),
+.levelDot:nth-child(2) {
+  background: #3b82f6;
+}
+
+/* Leaderboard Section */
+.leaderboardSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 30px 0;
+  color: #1a1a1a;
+}
+
+.leaderboard {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.leaderboardRow {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f5f5f5;
+  gap: 20px;
+  transition: background 0.2s ease;
+}
+
+.leaderboardRow:last-child {
+  border-bottom: none;
+}
+
+.leaderboardRow:hover {
+  background: #fafafa;
+}
+
+.leaderboardRank {
+  min-width: 60px;
+}
+
+.rankBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  font-weight: 700;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+.leaderboardName {
+  flex: 1;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.nameSubtext {
+  font-size: 12px;
+  color: #999;
+}
+
+.leaderboardStats {
+  display: flex;
+  gap: 30px;
+}
+
+.leaderboardStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statValueSmall {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.statLabelSmall {
+  font-size: 11px;
+  color: #999;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+/* Practice Section */
+.practiceSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.itemCount {
+  font-size: 14px;
+  color: #999;
+  font-weight: 500;
+}
+
+/* Filter Tabs */
+.filterTabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.filterTab {
+  padding: 12px 20px;
+  background: #f5f5f5;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.filterTab:hover {
+  border-color: #d0d0d0;
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+.filterTabActive {
+  background: #1a1a1a;
+  color: #ffffff;
+  border-color: #1a1a1a;
+}
+
+.filterCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.filterTabActive .filterCount {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Items Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.card:hover {
+  border-color: #d0d0d0;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px);
+}
+
+.cardCompleted {
+  background: #fafafa;
+  border-color: #e0e0e0;
+}
+
+.cardCompleted:hover {
+  background: #f5f5f5;
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.typeBadge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.typeChallenge {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.typeQuiz {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.typeProject {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+
+.difficultyBadge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.diffEasy {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.diffMedium {
+  background: #fffbeb;
+  color: #92400e;
+}
+
+.diffHard {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+.completedBadge {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: #16a34a;
+  background: #f0fdf4;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Card Content */
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+.cardDescription {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+/* Card Meta */
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+}
+
+.metaItem {
+  color: #666;
+  font-weight: 500;
+}
+
+/* CTA */
+.cta {
+  padding: 12px 20px;
+  background: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.cta:hover:not(:disabled) {
+  background: #333333;
+  transform: translateY(-2px);
+}
+
+.cta:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ctaCompleted {
+  background: #16a34a;
+  color: white;
+  cursor: default;
+}
+
+.ctaCompleted:hover {
+  background: #16a34a;
+  transform: none;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 20px;
+  }
+
+  .title {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .statCard {
+    padding: 20px 16px;
+  }
+
+  .statValue {
+    font-size: 28px;
+  }
+
+  .leaderboardStats {
+    gap: 20px;
+  }
+
+  .leaderboardRow {
+    padding: 16px 20px;
+    gap: 16px;
+  }
+
+  .practiceSection {
+    padding: 60px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+  }
+
+  .filterTabs {
+    gap: 8px;
+  }
+
+  .filterTab {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    padding: 20px 16px;
+  }
+
+  .cardTitle {
+    font-size: 16px;
+  }
+
+  .cta {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .statValue {
+    font-size: 24px;
+  }
+
+  .leaderboardStats {
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  .statValueSmall {
+    font-size: 14px;
+  }
+
+  .filterTabs {
+    width: 100%;
+  }
+
+  .filterTab {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .cardHeader {
+    gap: 6px;
+  }
+
+  .typeBadge {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+
+  .difficultyBadge {
+    font-size: 9px;
+    padding: 4px 8px;
+  }
+
+  .completedBadge {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}

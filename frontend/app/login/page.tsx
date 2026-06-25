@@ -17,7 +17,7 @@ const Page = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      setError("Please fill in all fields");
+      setError("Please fill in all fields"); 
       return;
     }
 
@@ -30,10 +30,17 @@ const Page = () => {
       });
 
       if (res.data.success) {
-        localStorage.setItem("token", res.data.token);
-        alert("Logged In Successfully 🎉");
-        router.push("/");
-      }
+  localStorage.setItem("token", res.data.token);
+
+  localStorage.setItem("userName", res.data.user.name);
+  localStorage.setItem("userEmail", res.data.user.email);
+
+  if (res.data.user.avatar) {
+    localStorage.setItem("userAvatar", res.data.user.avatar || "");
+  }
+
+  router.push("/");
+}
     } catch (err: any) {
       setError(err.response?.data?.message || "Login failed");
     } finally {

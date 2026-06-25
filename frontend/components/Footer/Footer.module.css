@@ -1,0 +1,277 @@
+:root {
+  --yellowColor: #feea00;
+  --greenColor: #07cc74;
+}
+
+/* ── Wrapper ── */
+.footer {
+  background: #0d0d0d;
+  color: #ccc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding: 64px 24px 0;
+}
+
+.inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Top grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Brand column ── */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.brandName {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+.tagline {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: #888;
+  max-width: 280px;
+}
+
+/* Social icons */
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.socialBtn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #aaa;
+  text-decoration: none;
+  font-size: 15px;
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+
+.socialBtn:hover {
+  background: var(--greenColor);
+  color: #000;
+  transform: translateY(-3px);
+}
+
+/* ── Link columns ── */
+.col h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 18px;
+}
+
+.col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.col ul li a {
+  text-decoration: none;
+  color: #888;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.col ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  border-radius: 20px;
+  background: var(--greenColor);
+  transition: width 0.3s ease;
+}
+
+.col ul li a:hover {
+  color: #fff;
+}
+
+.col ul li a:hover::after {
+  width: 100%;
+}
+
+/* ── Newsletter strip ── */
+.newsletter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.newsletterText h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.newsletterText p {
+  margin: 0;
+  font-size: 0.825rem;
+  color: #666;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.newsletterInput {
+  padding: 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-right: none;
+  border-radius: 50px 0 0 50px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 0.875rem;
+  width: 240px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.newsletterInput::placeholder {
+  color: #555;
+}
+
+.newsletterInput:focus {
+  border-color: var(--greenColor);
+}
+
+.newsletterBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 0 50px 50px 0;
+  background: var(--yellowColor);
+  color: #111;
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(254, 234, 0, 0.35);
+  transition: box-shadow 0.3s, transform 0.3s;
+  white-space: nowrap;
+}
+
+.newsletterBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(254, 234, 0, 0.5);
+}
+
+/* ── Bottom bar ── */
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.copyright span {
+  color: var(--greenColor);
+  font-weight: 600;
+}
+
+.legalLinks {
+  display: flex;
+  gap: 24px;
+}
+
+.legalLinks a {
+  text-decoration: none;
+  font-size: 0.8rem;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.legalLinks a:hover {
+  color: #fff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .newsletterForm {
+    width: 100%;
+  }
+
+  .newsletterInput {
+    width: 100%;
+    flex: 1;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
