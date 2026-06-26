@@ -1,6 +1,4 @@
-// =========================
-// IMPORTS
-// =========================
+"use client";
 import Image from "next/image";
 import {
   ShieldCheck,
@@ -11,11 +9,15 @@ import {
   BookOpen,
   Award,
   ArrowRight,
-  CheckCircle2,
   Play,
+  Briefcase,
+  Clock,
+  Zap,
+  LucideIcon,
+  ChevronDown,
 } from "lucide-react";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel/TestimonialsCarousel";
-import { Clock, Zap } from "lucide-react";
+import { useState } from "react";
 
 interface Course {
   id: number;
@@ -26,15 +28,50 @@ interface Course {
   students: string;
   duration?: string;
   tag: string;
-  tagColor: string;
+  tone: "tone-green" | "tone-amber" | "tone-red";
   icon: string;
-  iconBg: string;
+  iconTone: "tone-green" | "tone-amber" | "tone-red" | "tone-purple";
   level?: "Beginner" | "Intermediate" | "Advanced";
 }
 
-// =========================
-// COURSES DATA
-// =========================
+interface Benefit {
+  icon: LucideIcon;
+  title: string;
+  text: string;
+  tone: "tone-green" | "tone-amber";
+}
+
+interface ProcessStep {
+  number: string;
+  title: string;
+  text: string;
+  icon: LucideIcon;
+}
+
+interface Stat {
+  value: string;
+  label: string;
+}
+
+interface Partner {
+  id: number;
+  name: string;
+  logo: string;
+}
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface RelatedCourse {
+  id: number;
+  title: string;
+  image: string;
+  price: string;
+}
+
+
 const COURSES: Course[] = [
   {
     id: 1,
@@ -45,9 +82,9 @@ const COURSES: Course[] = [
     students: "12.4k",
     duration: "24 weeks",
     tag: "Popular",
-    tagColor: "tagBlue",
+    tone: "tone-green",
     icon: "💻",
-    iconBg: "iconBgBlue",
+    iconTone: "tone-green",
     level: "Beginner",
   },
   {
@@ -59,9 +96,9 @@ const COURSES: Course[] = [
     students: "9.1k",
     duration: "20 weeks",
     tag: "Trending",
-    tagColor: "tagAmber",
+    tone: "tone-amber",
     icon: "🧠",
-    iconBg: "iconBgAmber",
+    iconTone: "tone-amber",
     level: "Intermediate",
   },
   {
@@ -73,9 +110,9 @@ const COURSES: Course[] = [
     students: "7.3k",
     duration: "16 weeks",
     tag: "New",
-    tagColor: "tagGreen",
+    tone: "tone-green",
     icon: "🎨",
-    iconBg: "iconBgGreen",
+    iconTone: "tone-green",
     level: "Beginner",
   },
   {
@@ -87,9 +124,9 @@ const COURSES: Course[] = [
     students: "8.5k",
     duration: "12 weeks",
     tag: "Popular",
-    tagColor: "tagBlue",
+    tone: "tone-green",
     icon: "📊",
-    iconBg: "iconBgPurple",
+    iconTone: "tone-purple",
     level: "Beginner",
   },
   {
@@ -101,9 +138,9 @@ const COURSES: Course[] = [
     students: "5.6k",
     duration: "18 weeks",
     tag: "Hot",
-    tagColor: "tagRed",
+    tone: "tone-red",
     icon: "🛡️",
-    iconBg: "iconBgRed",
+    iconTone: "tone-red",
     level: "Advanced",
   },
   {
@@ -115,89 +152,53 @@ const COURSES: Course[] = [
     students: "6.2k",
     duration: "22 weeks",
     tag: "New",
-    tagColor: "tagGreen",
+    tone: "tone-green",
     icon: "📱",
-    iconBg: "iconBgTeal",
+    iconTone: "tone-green",
     level: "Intermediate",
   },
 ];
 
-// =========================
-// PRICING PLANS DATA
-// =========================
-const PLANS = [
-  {
-    id: 1,
-    name: "Basic",
-    newPrice: "$19",
-    oldPrice: "$39",
-    desc: "Perfect for beginners starting their learning journey",
-    features: [
-      "Access to 10 courses",
-      "Student Community",
-      "Download Notes",
-      "Basic Support",
-    ],
-  },
-  {
-    id: 2,
-    name: "Pro",
-    newPrice: "$49",
-    oldPrice: "$89",
-    desc: "Best for serious learners who want results",
-    features: [
-      "Unlimited Courses",
-      "Live Classes",
-      "Assignments & Projects",
-      "Certificates",
-      "Priority Support",
-    ],
-    featured: true,
-  },
-  {
-    id: 3,
-    name: "Academy",
-    newPrice: "$99",
-    oldPrice: "$149",
-    desc: "Complete solution with career support",
-    features: [
-      "Everything in Pro",
-      "1-on-1 Mentorship",
-      "Career Guidance",
-      "Internship Support",
-      "Placement Assistance",
-    ],
-  },
-];
-
-// =========================
-// BENEFITS DATA
-// =========================
-const BENEFITS = [
+const BENEFITS: Benefit[] = [
   {
     icon: ShieldCheck,
     title: "Certified Courses",
-    text: "Earn industry-recognized certificates after completing your course.",
-    color: "benefitBlue",
+    text: "Earn industry-recognized certificates after successfully completing your course.",
+    tone: "tone-green",
   },
   {
     icon: Brain,
     title: "Learn Anywhere",
-    text: "Access all your courses anytime from desktop, tablet, or mobile.",
-    color: "benefitAmber",
+    text: "Access your courses anytime on desktop, tablet, or mobile devices.",
+    tone: "tone-amber",
   },
   {
     icon: BadgeCheck,
     title: "Expert Instructors",
-    text: "Learn directly from experienced professionals and top mentors.",
-    color: "benefitGreen",
+    text: "Learn from experienced professionals and industry-leading mentors.",
+    tone: "tone-green",
+  },
+  {
+    icon: BookOpen,
+    title: "Comprehensive Curriculum",
+    text: "Follow a well-structured curriculum designed to build practical skills step by step.",
+    tone: "tone-amber",
+  },
+  {
+    icon: Users,
+    title: "Community Support",
+    text: "Join a community of learners, ask questions, and collaborate with peers.",
+    tone: "tone-green",
+  },
+  {
+    icon: Briefcase,
+    title: "Career Opportunities",
+    text: "Gain job-ready skills, build your portfolio, and prepare for career growth.",
+    tone: "tone-amber",
   },
 ];
 
-// =========================
-// STEPS DATA
-// =========================
-const STEPS = [
+const STEPS: ProcessStep[] = [
   {
     number: "01",
     title: "Choose a course",
@@ -218,64 +219,95 @@ const STEPS = [
   },
 ];
 
-// =========================
-// STATS DATA
-// =========================
-const STATS = [
+const PARTNERS: Partner[] = [
+  { id: 1, name: "Java", logo: "/Images/java.png" },
+  { id: 2, name: "Python", logo: "/Images/python.png" },
+  { id: 3, name: "MySQL", logo: "/Images/mysql.png" },
+  { id: 4, name: "JavaScript", logo: "/Images/javascript.png" },
+  { id: 5, name: "HTML", logo: "/Images/html.png" },
+  { id: 6, name: "CSS", logo: "/Images/css.png" },
+  { id: 7, name: "PHP", logo: "/Images/php.png" },
+  { id: 8, name: "TypeScript", logo: "/Images/typescript.png" },
+  { id: 9, name: "Swift", logo: "/Images/swift.png" },
+];
+
+const STATS: Stat[] = [
   { value: "40k+", label: "Active Students" },
   { value: "120+", label: "Expert Courses" },
   { value: "4.9★", label: "Average Rating" },
   { value: "95%", label: "Job Placement" },
 ];
 
-const STATS_BANNER = [
+const FAQS: FAQ[] = [
   {
-    value: "40,000+",
-    label: "Active Students",
-    icon: Users,
-    color: "statBlue",
+    question: "Do I need any prior experience?",
+    answer:
+      "No. This course is beginner-friendly and starts from the fundamentals.",
   },
   {
-    value: "120+",
-    label: "Expert Courses",
-    icon: BookOpen,
-    color: "statAmber",
+    question: "Will I receive a certificate?",
+    answer:
+      "Yes. You'll receive a certificate after successfully completing the course.",
   },
   {
-    value: "4.9 / 5",
-    label: "Average Rating",
-    icon: Star,
-    color: "statYellow",
+    question: "How long will I have access?",
+    answer:
+      "You'll get lifetime access to all course materials and future updates.",
   },
   {
-    value: "95%",
-    label: "Job Placement",
-    icon: Award,
-    color: "statGreen",
-  },
-  {
-    value: "50+",
-    label: "Expert Instructors",
-    icon: BadgeCheck,
-    color: "statPurple",
+    question: "Can I access the course on mobile?",
+    answer:
+      "Yes. Learn anytime using your desktop, tablet, or mobile device.",
   },
 ];
 
-// =========================
-// HOME PAGE COMPONENT
-// =========================
+const RELATED_COURSES: RelatedCourse[] = [
+  { id: 1, title: "Python Masterclass", image: "/Images/python.png", price: "$49" },
+  { id: 2, title: "PHP Complete Guide", image: "/Images/php.png", price: "$59" },
+  { id: 3, title: "JavaScript Essentials", image: "/Images/javascript.png", price: "$39" },
+];
+
+
+function SectionHeader({
+  label,
+  title,
+  subtitle,
+  action,
+}: {
+  label: string;
+  title: React.ReactNode;
+  subtitle?: string;
+  action?: React.ReactNode;
+}) {
+  return (
+    <div className={action ? "sectionHeaderRow" : undefined}>
+      <div>
+        <div className="sectionLabel">{label}</div>
+        <h2 className="sectionTitle">{title}</h2>
+        {subtitle && <p className="sectionSubtitle">{subtitle}</p>}
+      </div>
+      {action}
+    </div>
+  );
+}
+
+// ============================================================================
+// HOME PAGE
+// ============================================================================
+
 export default function Home() {
+  const triplePartners = [...PARTNERS, ...PARTNERS, ...PARTNERS];
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
   return (
     <>
-      {/* ================= HERO SECTION ================= */}
+      {/* ========== HERO ========== */}
       <section className="heroSection">
-        {/* Decorative background blobs */}
         <div className="floatingBox1" />
         <div className="floatingBox2" />
 
         <div className="container">
           <div className="heroInner">
-            {/* Left: Text Content */}
             <div className="heroContent">
               <div className="accentBar" />
 
@@ -297,18 +329,16 @@ export default function Home() {
                 <button className="btnBrowse">Browse courses</button>
               </div>
 
-              {/* Stats Row */}
               <div className="heroStats">
-                {STATS.map((s, i) => (
-                  <div className="heroStatItem" key={i}>
-                    <span className="heroStatValue">{s.value}</span>
-                    <span className="heroStatLabel">{s.label}</span>
+                {STATS.map((stat) => (
+                  <div className="heroStatItem" key={stat.label}>
+                    <span className="heroStatValue">{stat.value}</span>
+                    <span className="heroStatLabel">{stat.label}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right: Hero Image */}
             <div className="imageWrapper">
               <Image
                 src="/notion1.png"
@@ -323,15 +353,53 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= BENEFITS SECTION ================= */}
+      {/* ========== TRUSTED BY ========== */}
+      <section className="trustedBySection">
+        <div className="container">
+          <p className="trustedByLabel">Trusted By</p>
+          <h2 className="trustedByTitle sectionTitle">
+            Trusted by companies around the world
+          </h2>
+        </div>
+
+        <div className="trustedByMarqueeWrapper">
+          <div className="trustedByMarqueeContent">
+            {triplePartners.map((partner, index) => (
+              <div className="partnerLogoItem" key={`${partner.id}-${index}`}>
+                <Image
+                  src={partner.logo}
+                  alt={partner.name}
+                  width={80}
+                  height={80}
+                  className="partnerLogo"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== BENEFITS ========== */}
       <section className="benefitsSection">
         <div className="container">
-          <div className="sectionLabel">Why students choose us</div>
+          <SectionHeader
+            label="Why Choose Us"
+            title={
+              <>
+                Everything You Need to <br /> Succeed in Your Learning Journey
+              </>
+            }
+          />
+          <p className="sectionDescription">
+            Learn from industry experts, earn recognized certifications, and
+            access high-quality courses anytime, anywhere. We provide the
+            tools and support you need to achieve your career goals.
+          </p>
 
           <div className="benefitsGrid">
-            {BENEFITS.map(({ icon: Icon, title, text, color }) => (
-              <div className={`benefitCard ${color}`} key={title}>
-                <div className="benefitIconWrap">
+            {BENEFITS.map(({ icon: Icon, title, text, tone }) => (
+              <div className="benefitCard" key={title}>
+                <div className={`benefitIconWrap ${tone}`}>
                   <Icon size={22} />
                 </div>
                 <h3 className="benefitTitle">{title}</h3>
@@ -342,22 +410,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= PROCESS SECTION ================= */}
+      {/* ========== PROCESS ========== */}
       <section className="processSection">
         <div className="container">
           <div className="processLayout">
-            {/* Left */}
             <div className="processLeft">
-              <div className="sectionLabel">How it works</div>
-              <h2 className="processTitle">
-                Three steps to your
-                <br />
-                next opportunity
-              </h2>
-              <p className="processSubtitle">
-                A simple, guided journey from beginner to job-ready — no
-                experience needed.
-              </p>
+              <SectionHeader
+                label="How it works"
+                title={
+                  <>
+                    Three steps to your
+                    <br />
+                    next opportunity
+                  </>
+                }
+                subtitle="A simple, guided journey from beginner to job-ready — no experience needed."
+              />
 
               <div className="stepsList">
                 {STEPS.map(({ number, title, text, icon: Icon }) => (
@@ -375,7 +443,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: Image with overlay card */}
             <div className="processRight">
               <div className="processImageWrap">
                 <Image
@@ -385,6 +452,7 @@ export default function Home() {
                   height={480}
                   className="processImg"
                 />
+
                 <div className="processFloatCard">
                   <div className="floatCardRow">
                     <div className="floatAvatars">
@@ -404,29 +472,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= COURSES SECTION ================= */}
+      {/* ========== COURSES ========== */}
       <section className="coursesSection">
         <div className="container">
-          {/* Header */}
-          <div className="coursesSectionHeader">
-            <div>
-              <div className="sectionLabel">What you&apos;ll learn</div>
-              <h2 className="coursesTitle">Popular courses</h2>
-              <p className="coursesSubtitle">
-                Master in-demand skills with expert instructors
-              </p>
-            </div>
-            <button className="viewAllBtn">
-              View all courses
-              <ArrowRight size={16} strokeWidth={2.5} />
-            </button>
-          </div>
+          <SectionHeader
+            label="What you'll learn"
+            title="Popular courses"
+            subtitle="Master in-demand skills with expert instructors"
+            action={
+              <button className="viewAllBtn">
+                View all courses
+                <ArrowRight size={16} strokeWidth={2.5} />
+              </button>
+            }
+          />
 
-          {/* Responsive Grid */}
           <div className="coursesGrid">
             {COURSES.map((course) => (
               <div className="courseCard" key={course.id}>
-                {/* Image Section */}
                 <div className="courseImageContainer">
                   <Image
                     src={course.image}
@@ -436,6 +499,7 @@ export default function Home() {
                     className="courseImage"
                     priority={course.id <= 3}
                   />
+
                   <div className="imageOverlay">
                     <button className="exploreBtn">
                       Explore
@@ -443,12 +507,10 @@ export default function Home() {
                     </button>
                   </div>
 
-                  {/* Tag */}
-                  <span className={`courseTag ${course.tagColor}`}>
+                  <span className={`courseTag ${course.tone}`}>
                     {course.tag}
                   </span>
 
-                  {/* Level Badge */}
                   {course.level && (
                     <span
                       className={`courseLevelBadge level-${course.level.toLowerCase()}`}
@@ -458,10 +520,9 @@ export default function Home() {
                   )}
                 </div>
 
-                {/* Content Section */}
                 <div className="courseCardContent">
                   <div className="courseCardHeader">
-                    <div className={`courseIcon ${course.iconBg}`}>
+                    <div className={`courseIcon ${course.iconTone}`}>
                       {course.icon}
                     </div>
                     <h3 className="courseCardTitle">{course.title}</h3>
@@ -469,7 +530,6 @@ export default function Home() {
 
                   <p className="courseCardDesc">{course.desc}</p>
 
-                  {/* Meta Information */}
                   <div className="courseMetaSection">
                     <div className="metaItem">
                       <Star size={14} className="metaIcon" />
@@ -487,7 +547,6 @@ export default function Home() {
                     )}
                   </div>
 
-                  {/* Footer CTA */}
                   <button className="enrollBtn">
                     Enroll now
                     <Zap size={14} />
@@ -499,61 +558,87 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= TESTIMONIALS SECTION ================= */}
+      {/* ========== TESTIMONIALS ========== */}
       <TestimonialsCarousel />
 
-      {/* ================= PRICING SECTION ================= */}
-      <section className="pricingSection">
+      {/* ========== FAQ ========== */}
+      <section className="faqSection">
         <div className="container">
-          <div className="pricingSectionHeader">
-            <div className="sectionLabel">Pricing</div>
-            <h2 className="pricingTitle">Simple, transparent pricing</h2>
-            <p className="pricingSubtitle">
-              Pick the plan that fits your learning goals. Upgrade anytime.
-            </p>
-          </div>
+          <SectionHeader
+            label="FAQ"
+            title="Frequently Asked Questions"
+            subtitle="Everything you need to know before enrolling."
+          />
 
-          <div className="pricingGrid">
-            {PLANS.map((plan) => (
-              <div
-                key={plan.id}
-                className={`pricingCard ${plan.featured ? "pricingCardFeatured" : ""}`}
-              >
-                {plan.featured && (
-                  <div className="popularBadge">Most popular</div>
-                )}
-
-                <div className="pricingCardTop">
-                  <h3 className="planName">{plan.name}</h3>
-                  <p className="planDesc">{plan.desc}</p>
-                </div>
-
-                <div className="priceRow">
-                  <span className="priceNew">{plan.newPrice}</span>
-                  <div className="priceRight">
-                    <span className="priceOld">{plan.oldPrice}</span>
-                    <span className="pricePeriod">/month</span>
-                  </div>
-                </div>
-
-                <ul className="featuresList">
-                  {plan.features.map((f) => (
-                    <li key={f} className="featureItem">
-                      <CheckCircle2 size={15} className="featureCheck" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
+          <div className="faqList">
+            {FAQS.map((item, index) => (
+              <div className="faqItem" key={item.question}>
                 <button
-                  className={
-                    plan.featured ? "planBtnPrimary" : "planBtnSecondary"
-                  }
+                  className="faqQuestion"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
                 >
-                  Get started
+                  {item.question}
+                  <ChevronDown
+                    size={18}
+                    className={openFaq === index ? "rotate" : ""}
+                  />
                 </button>
+
+                {openFaq === index && (
+                  <div className="faqAnswer">{item.answer}</div>
+                )}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== RELATED COURSES ========== */}
+      <section className="relatedSection">
+        <div className="container">
+          <SectionHeader
+            label="Related Courses"
+            title="Continue Your Learning Journey"
+          />
+
+          <div className="relatedGrid">
+            {RELATED_COURSES.map((course) => (
+              <div className="relatedCard" key={course.id}>
+                <Image
+                  src={course.image}
+                  alt={course.title}
+                  width={350}
+                  height={200}
+                  className="relatedImage"
+                />
+                <div className="relatedBody">
+                  <h3>{course.title}</h3>
+                  <p>{course.price}</p>
+                  <button className="courseBtn">View Course</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ========== CTA ========== */}
+      <section className="courseCTA">
+        <div className="container">
+          <div className="ctaBox">
+            <h2>Ready to Start Learning?</h2>
+            <p>
+              Join thousands of students learning new skills every day.
+              Enroll now and start building your future.
+            </p>
+
+            <div className="ctaButtons">
+              <button className="btnPrimary">Enroll Now</button>
+              <button className="btnSecondary">
+                Browse Courses
+                <ArrowRight size={16} />
+              </button>
+            </div>
           </div>
         </div>
       </section>

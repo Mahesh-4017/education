@@ -57,12 +57,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
         aria-expanded={open}
       >
         <span className={styles.avatar}>
-          {user?.avatar?.url ? (
-            <img src={user.avatar.url} alt={user.name} />
-          ) : (
-            getInitials(user.name)
-          )}
-        </span>
+  {user?.name?.charAt(0).toUpperCase()}
+</span>
         <span className={styles.username}>{user.name}</span>
         <FiChevronDown
           className={`${styles.chevron} ${open ? styles.chevronOpen : ""}`}
@@ -77,11 +73,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
         {/* User header */}
         <div className={styles.dropdownHeader}>
           <span className={styles.dropdownAvatar}>
-            {user?.avatar?.url ? (
-              <img src={user?.avatar.url} alt={user.name} />
-            ) : (
-              getInitials(user.name)
-            )}
+            <span className={styles.avatar}>
+  {user?.name?.charAt(0).toUpperCase()}
+</span>
           </span>
           <div className={styles.dropdownUserInfo}>
             <span className={styles.dropdownName}>{user.name}</span>
