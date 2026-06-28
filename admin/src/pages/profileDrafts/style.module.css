@@ -1,0 +1,148 @@
+.draftModal {
+  max-width: 900px;
+  width: 95%;
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.comparisonGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.comparisonColumn {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fafbfc;
+}
+
+.comparisonColumn h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.1rem;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.currentCol h3 {
+  color: #475569;
+  border-bottom-color: #94a3b8;
+}
+
+.newCol h3 {
+  color: #2563eb;
+  border-bottom-color: #3b82f6;
+}
+
+.fieldRow {
+  margin-bottom: 14px;
+}
+
+.fieldRow label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.fieldRow .value {
+  font-size: 0.95rem;
+  color: #1e293b;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  min-height: 20px;
+}
+
+.changed {
+  background: #eff6ff !important;
+  border-color: #3b82f6 !important;
+  font-weight: 600;
+}
+
+.actionBar {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.approveBtn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #16a34a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.approveBtn:hover {
+  background: #15803d;
+}
+
+.rejectBtn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #dc2626;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.rejectBtn:hover {
+  background: #b91c1c;
+}
+
+.rejectInput {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.rejectInput:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: #94a3b8;
+}
+
+.emptyState h2 {
+  margin: 16px 0 8px;
+  color: #64748b;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.badgeReview {
+  background: #dbeafe;
+  color: #1e40af;
+}

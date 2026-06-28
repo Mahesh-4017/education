@@ -6,6 +6,7 @@ import compression from "compression";
 import helmet from "helmet";
 import errorMiddleware from "./middleware/error";
 import userRoutes from "./routes/user.routes";
+import adminRoutes from "./routes/admin.routes";
 const app: Application = express();
 // const allowedOrigins: string[] = [
 //   "http://localhost:5173",
@@ -29,6 +30,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join(__dirname, "./build")));
 
 app.use("/api/v1", userRoutes);
+app.use("/api/v1/", adminRoutes);
 
 app.get("/*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "./build", "index.html"));

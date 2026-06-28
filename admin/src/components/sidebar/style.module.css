@@ -1,0 +1,223 @@
+.wrapper {
+    height: 100vh;
+    width: 100vw;
+}
+
+.wrapper.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginForm {
+    background-color: var(--white2);
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    padding: 40px 20px;
+    border-radius: 10px;
+    max-width: 350px;
+    width: 950%;
+
+}
+
+.loginForm * {
+    background-color: var(--white2);
+
+}
+
+.wrapper img {
+    height: 100px;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+.formBox {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.formBox>label {
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.formBox>input {
+    font-size: 1.1rem;
+    outline: none;
+    border: 2px solid var(--text);
+    border-radius: 10px;
+    padding: 8px 15px;
+}
+
+.btn {
+    background-color: var(--text);
+    color: var(--white2);
+    font-size: 1.2rem;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-top: 20px;
+    cursor: no-drop;
+}
+
+.btn.active {
+    background-color: var(--text2);
+    cursor: pointer;
+}
+
+/* sidebar */
+.wrapper.dashboard {
+    display: flex;
+    background-color: var(--white2);
+}
+
+.sideBar {
+    width: 280px;
+    height: 100vh;
+    border-right: 1px solid var(--white3);
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 16px;
+    gap: 20px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.02);
+    overflow-y: auto;
+}
+
+.sideBar img {
+    height: 60px;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.navMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.routeCon {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.routeHeader {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: var(--text);
+    user-select: none;
+}
+
+.routeHeader h2 {
+    font-weight: 500;
+    font-size: 1rem;
+    flex-grow: 1;
+    /* Pushes icon to the right */
+    color: inherit;
+    margin: 0;
+}
+
+.routeHeader svg {
+    color: inherit;
+    min-width: 22px;
+}
+
+.routeHeader:hover {
+    background-color: var(--white2);
+    color: var(--text2);
+}
+
+/* Active group styling */
+.activeGroup>.routeHeader {
+    background-color: rgba(115, 103, 240, 0.08);
+    /* Primary color w/ low opacity */
+    color: var(--text2);
+    font-weight: 600;
+}
+
+.icon {
+    transition: transform 0.3s ease;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.activeIcon {
+    transform: rotate(90deg);
+    opacity: 1;
+}
+
+.subRouteCon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 42px;
+    /* Indent sub-items to align with text */
+    margin-top: 4px;
+    margin-bottom: 4px;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.activeSubMenu {
+    height: auto;
+    opacity: 1;
+    overflow: visible;
+}
+
+.subRouteItem {
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.subRouteItem::before {
+    content: '';
+    position: absolute;
+    left: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 1px solid var(--text);
+    opacity: 0.4;
+    transition: all 0.2s;
+}
+
+.subRouteItem h2 {
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin: 0;
+    color: inherit;
+}
+
+.subRouteItem:hover {
+    color: var(--text2);
+}
+
+.subRouteItem:hover::before {
+    border-color: var(--text2);
+    background-color: var(--text2);
+    opacity: 1;
+}

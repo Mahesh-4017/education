@@ -34,17 +34,17 @@ const Navbar = () => {
           </div>
 
           {/* Desktop nav links */}
-         <nav className={styles.navLinks}>
-      {links.map((link) => (
-        <Link
-          key={link.title}
-          href={link.href}
-          className={pathname === link.href ? styles.active : ""}
-        >
-          {link.title}
-        </Link>
-      ))}
-    </nav>
+          <nav className={styles.navLinks}>
+            {links.map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                className={pathname === link.href ? styles.active : ""}
+              >
+                {link.title}
+              </Link>
+            ))}
+          </nav>
 
           {/* Right side */}
           <div className={styles.rightcontainer}>
@@ -88,7 +88,8 @@ const Navbar = () => {
 
           <div className={styles.actionsdropdown}>
             {userInfo?._id ? (
-              <UserMenu />
+              <UserMenu user={userInfo} />
+
             ) : (
               <>
                 <Link className={styles.loginBtndropdown} href="/login">

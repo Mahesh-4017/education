@@ -1,0 +1,159 @@
+.formContainer {
+  max-width: 550px;
+  width: 95%;
+  background: white;
+  padding: 30px 40px;
+  margin: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formContainer * {
+  overflow: clip;
+}
+
+.label {
+  color: var(--text, #334155);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  background-color: transparent;
+  display: block;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.gridRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.inputField {
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  width: 100%;
+  padding: 10px 14px;
+  color: var(--text, #0f172a);
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.inputArea {
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  width: 100%;
+  padding: 10px 14px;
+  color: var(--text, #0f172a);
+  border-radius: 6px;
+  font-size: 1rem;
+  min-height: 80px;
+  resize: vertical;
+  outline: none;
+}
+
+.chip {
+  cursor: default;
+  color: var(--text, #334155);
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 500;
+}
+
+.chipContainer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.actionContainer {
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  margin-top: 10px;
+}
+
+.actionGroup {
+  display: flex;
+  gap: 15px;
+}
+
+.radioBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  background: white;
+}
+
+.radioBtn input[type="radio"] {
+  display: none;
+}
+
+.radioBtn.approve {
+  color: #16a34a;
+}
+
+.radioBtn.reject {
+  color: #dc2626;
+}
+
+.radioBtn.block {
+  color: #ea580c;
+}
+
+.radioBtn.approve.selected {
+  border-color: #16a34a;
+  background-color: #f0fdf4;
+}
+
+.radioBtn.reject.selected {
+  border-color: #dc2626;
+  background-color: #fef2f2;
+}
+
+.radioBtn.block.selected {
+  border-color: #ea580c;
+  background-color: #fff7ed;
+}
+
+.submitButton {
+  background-color: var(--text2, #3b82f6);
+  border: none;
+  padding: 12px 20px;
+  color: white;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  width: 100%;
+}
+
+.submitButton:hover {
+  opacity: 0.9;
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
